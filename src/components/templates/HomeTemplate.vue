@@ -1,6 +1,7 @@
 <script setup>
 import CardPostVue from "../molecules/CardPost.vue";
 import PostList from "../organisms/PostsList.vue";
+
 </script>
 
 <template>
