@@ -31,6 +31,11 @@ export default {
 
 header {
   height: $sb-nav_height;
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  z-index: 10;
 
   nav {
     width: 100%;

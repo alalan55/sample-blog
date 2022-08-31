@@ -1,8 +1,10 @@
-<script setup></script>
+<script setup>
+import PostTemplate from "@/components/templates/PostTemplate.vue";
+</script>
 <template>
-  <div>
-    <h1>Página de postagem</h1>
-  </div>
+  <main>
+    <PostTemplate />
+  </main>
 </template>
 
 <style lang="scss" scoped></style>

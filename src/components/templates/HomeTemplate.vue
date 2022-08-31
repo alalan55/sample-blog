@@ -23,7 +23,7 @@ import PostList from "../organisms/PostsList.vue";
 @import "@/assets/scss/main.scss";
 
 .home {
-  padding: $sb-size-2 $sb-size-4;
+  padding: $sb-nav_height $sb-size-2 $sb-size-4;
   &__title {
     margin: 0 0 $sb-size-2 0;
     span {
