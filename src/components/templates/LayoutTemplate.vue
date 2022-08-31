@@ -26,7 +26,7 @@ export default {
   background: $sb-bg;
 
   &__content {
-    min-height: calc(100vh - $sb-nav_height);
+    min-height: 100vh;
   }
 }
 </style>
