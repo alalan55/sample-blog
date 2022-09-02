@@ -18,7 +18,6 @@ export const useAuthStore = defineStore({
           return true;
         }
       } catch (error) {
-        console.log(error);
         return false;
       }
     },

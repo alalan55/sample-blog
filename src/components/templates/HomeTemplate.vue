@@ -1,10 +1,13 @@
 <script setup>
 import { ref, defineAsyncComponent } from "vue";
+import { useToast } from "vue-toastification";
 import api from "@/services/http";
+import LoadingDatasVue from "../organisms/LoadingDatas.vue";
 
 const CardPostVue = defineAsyncComponent(() => import("../molecules/CardPost.vue"));
 const PostList = defineAsyncComponent(() => import("../organisms/PostsList.vue"));
 
+const toast = useToast();
 const majorPost = ref({});
 const posts = ref([]);
 
@@ -14,7 +17,7 @@ async function fetchPosts() {
     majorPost.value = response.data[0];
     posts.value = response.data.slice(1);
   } catch (error) {
-    console.error(error);
+    toast.error("Erro ao carregar postagens.");
   }
 }
 fetchPosts();
@@ -40,7 +43,7 @@ fetchPosts();
         <PostList :posts="posts" />
       </div>
       <template #fallback>
-        <span> Loading </span>
+        <LoadingDatasVue />
       </template>
     </Suspense>
   </div>
