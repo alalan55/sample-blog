@@ -46,7 +46,9 @@ watch(showPassword, (newValue) => {
       </div>
 
       <div class="auth__card__desctiprion">
-        <span> Insira suas informações abaixo, para realizar a autenticação </span>
+        <span>
+          Insira suas informações abaixo, para realizar a autenticação
+        </span>
       </div>
 
       <div class="auth__card__form">

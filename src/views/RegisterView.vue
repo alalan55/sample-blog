@@ -46,7 +46,9 @@ watch(showPassword, (newValue) => {
       </div>
 
       <div class="register__card__desctiprion">
-        <span> Insira suas informações abaixo, para realizar seu cadastro! </span>
+        <span>
+          Insira suas informações abaixo, para realizar seu cadastro!
+        </span>
       </div>
 
       <div class="register__card__form">
