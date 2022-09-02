@@ -1,6 +1,9 @@
 <script setup>
 import { ref, defineAsyncComponent } from "vue";
+import { useToast } from "vue-toastification";
 import api from "@/services/http";
+
+const toast = useToast()
 
 const CardPostVue = defineAsyncComponent(() => import("../molecules/CardPost.vue"));
 const PostList = defineAsyncComponent(() => import("../organisms/PostsList.vue"));
@@ -14,7 +17,7 @@ async function fetchPosts() {
     majorPost.value = response.data[0];
     posts.value = response.data.slice(1);
   } catch (error) {
-    console.error(error);
+    toast.error("Erro ao carregar postagens.")
   }
 }
 fetchPosts();

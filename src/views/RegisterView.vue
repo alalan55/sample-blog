@@ -23,6 +23,8 @@ const register = async () => {
   if (isSuccefullyRegister) {
     toast.success("Registro realizado com sucesso");
     router.push({ name: "auth" });
+  } else {
+    toast.error("Erro ao realizar registro.");
   }
   loading.value = false;
 };

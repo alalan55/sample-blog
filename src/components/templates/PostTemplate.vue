@@ -1,14 +1,17 @@
 <script setup>
 import { ref, defineAsyncComponent } from "vue";
 import { useRoute } from "vue-router";
+import { useToast } from "vue-toastification";
 import api from "../../services/http";
+
+
+const route = useRoute();
+const toast = useToast();
 
 const CardCommentVue = defineAsyncComponent(() => import("../molecules/CardComment.vue"));
 const CardCommentsAndLikes = defineAsyncComponent(() =>
   import("../molecules/CardCommentsAndLikes.vue")
 );
-
-const route = useRoute();
 
 const slug = ref("");
 const post = ref({});
@@ -21,6 +24,7 @@ const findPost = async () => {
     post.value = response.data[0];
   } catch (error) {
     console.error(error);
+    toast.error("Erro ao buscar postagem.")
   }
 };
 findPost();
