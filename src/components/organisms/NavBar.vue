@@ -1,30 +1,42 @@
+<script setup>
+import { ref } from "vue";
+import {} from "pinia";
+import { useAuthStore } from "@/stores/auth";
+import Logo from "@/components/atoms/LogoIcon.vue";
+
+const store = useAuthStore();
+const userLogged = ref(null);
+userLogged.value = store.$user;
+
+const logout = async () => {
+  let isSuccefullyLogout = await store.logout();
+  if (isSuccefullyLogout) {
+    userLogged.value = store.$user;
+  }
+};
+</script>
 <template>
   <header>
     <nav>
       <div class="logo">
-        <span> SB </span>
+        <Logo />
       </div>
       <div class="links">
         <ul>
           <li>
             <router-link to="/">Home</router-link>
           </li>
-          <li>
-            <router-link to="/about">Posts</router-link>
+          <li v-if="!userLogged">
+            <router-link to="/auth">Login</router-link>
+          </li>
+          <li v-if="userLogged">
+            <a @click="logout">Logout</a>
           </li>
         </ul>
       </div>
     </nav>
   </header>
 </template>
-
-<script>
-export default {
-  setup() {
-    return {};
-  },
-};
-</script>
 
 <style lang="scss" scoped>
 @import "@/assets/scss/main.scss";
@@ -45,21 +57,6 @@ header {
     justify-content: space-between;
     gap: 0.5rem;
     padding: $sb-size-1 $sb-size-2;
-    .logo {
-      span {
-        font-weight: 800;
-        padding: 0.5rem;
-        color: white;
-        border-radius: 50%;
-        background: rgb(131, 58, 180);
-        background: linear-gradient(
-          90deg,
-          rgba(131, 58, 180, 1) 0%,
-          rgba(253, 29, 29, 0.6895133053221288) 50%,
-          rgba(252, 176, 69, 1) 100%
-        );
-      }
-    }
 
     .links {
       ul {
@@ -76,6 +73,7 @@ header {
             font-weight: 800;
             color: $sb-bg-dark;
             font-size: 1.2em;
+            cursor: pointer;
           }
           .router-link-exact-active {
             color: $sb-bg-pink-1;
