@@ -1,7 +1,25 @@
 <script setup>
+import { ref } from "vue";
+import api from "@/services/http";
+
 import CardPostVue from "../molecules/CardPost.vue";
 import PostList from "../organisms/PostsList.vue";
 
+const majorPost = ref({});
+const posts = ref([]);
+
+async function fetchPosts() {
+  try {
+
+    let response = await api.get("/rest/v1/posts?select=*");
+    majorPost.value = response.data[0];
+    posts.value = response.data.slice(1);
+
+  } catch (error) {
+    console.error(error);
+  }
+}
+fetchPosts();
 </script>
 
 <template>
@@ -11,11 +29,11 @@ import PostList from "../organisms/PostsList.vue";
     </div>
 
     <div class="home__main-post">
-      <CardPostVue :isMainPost="true" />
+      <CardPostVue :isMainPost="true" :post="majorPost" />
     </div>
 
     <div class="home__posts">
-      <PostList />
+      <PostList :posts="posts" />
     </div>
   </div>
 </template>

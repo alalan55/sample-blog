@@ -1,6 +1,10 @@
 <script setup>
-const props = defineProps({ isMainPost: { type: Boolean, default: false } });
+const props = defineProps({
+  isMainPost: { type: Boolean, default: false },
+  post: { type: Object },
+});
 </script>
+
 <template>
   <div class="card">
     <figure class="item">
