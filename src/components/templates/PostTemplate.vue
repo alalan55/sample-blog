@@ -24,7 +24,6 @@ const findPost = async () => {
     let response = await api.get(`/rest/v1/posts?slug=eq.${slug.value}`);
     post.value = response.data[0];
   } catch (error) {
-    console.error(error);
     toast.error("Erro ao buscar postagem.");
   }
 };

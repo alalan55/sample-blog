@@ -2,16 +2,12 @@
 import { ref, defineAsyncComponent } from "vue";
 import { useToast } from "vue-toastification";
 import api from "@/services/http";
+import LoadingDatasVue from "../organisms/LoadingDatas.vue";
+
+const CardPostVue = defineAsyncComponent(() => import("../molecules/CardPost.vue"));
+const PostList = defineAsyncComponent(() => import("../organisms/PostsList.vue"));
 
 const toast = useToast();
-
-const CardPostVue = defineAsyncComponent(() =>
-  import("../molecules/CardPost.vue")
-);
-const PostList = defineAsyncComponent(() =>
-  import("../organisms/PostsList.vue")
-);
-
 const majorPost = ref({});
 const posts = ref([]);
 
@@ -35,11 +31,7 @@ fetchPosts();
 
     <Suspense>
       <div class="home__main-post">
-        <CardPostVue
-          :isMainPost="true"
-          :majorPost="majorPost"
-          v-if="majorPost.id"
-        />
+        <CardPostVue :isMainPost="true" :majorPost="majorPost" v-if="majorPost.id" />
       </div>
       <template #fallback>
         <span> Loading </span>
@@ -51,7 +43,7 @@ fetchPosts();
         <PostList :posts="posts" />
       </div>
       <template #fallback>
-        <span> Loading </span>
+        <LoadingDatasVue />
       </template>
     </Suspense>
   </div>
