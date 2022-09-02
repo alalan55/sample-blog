@@ -1,9 +1,9 @@
 <script setup>
-import { ref } from "vue";
+import { ref, defineAsyncComponent } from "vue";
 import api from "@/services/http";
 
-import CardPostVue from "../molecules/CardPost.vue";
-import PostList from "../organisms/PostsList.vue";
+const CardPostVue = defineAsyncComponent(() => import("../molecules/CardPost.vue"));
+const PostList = defineAsyncComponent(() => import("../organisms/PostsList.vue"));
 
 const majorPost = ref({});
 const posts = ref([]);
@@ -26,17 +26,23 @@ fetchPosts();
       <span> Sample Blog </span>
     </div>
 
-    <div class="home__main-post">
-      <CardPostVue
-        :isMainPost="true"
-        :majorPost="majorPost"
-        v-if="majorPost.id"
-      />
-    </div>
+    <Suspense>
+      <div class="home__main-post">
+        <CardPostVue :isMainPost="true" :majorPost="majorPost" v-if="majorPost.id" />
+      </div>
+      <template #fallback>
+        <span> Loading </span>
+      </template>
+    </Suspense>
 
-    <div class="home__posts">
-      <PostList :posts="posts" />
-    </div>
+    <Suspense>
+      <div class="home__posts">
+        <PostList :posts="posts" />
+      </div>
+      <template #fallback>
+        <span> Loading </span>
+      </template>
+    </Suspense>
   </div>
 </template>
 

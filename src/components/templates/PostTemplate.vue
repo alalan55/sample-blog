@@ -1,9 +1,12 @@
 <script setup>
-import { ref } from "vue";
+import { ref, defineAsyncComponent } from "vue";
 import { useRoute } from "vue-router";
 import api from "../../services/http";
-import CardCommentVue from "../molecules/CardComment.vue";
-import CardCommentsAndLikes from "../molecules/CardCommentsAndLikes.vue";
+
+const CardCommentVue = defineAsyncComponent(() => import("../molecules/CardComment.vue"));
+const CardCommentsAndLikes = defineAsyncComponent(() =>
+  import("../molecules/CardCommentsAndLikes.vue")
+);
 
 const route = useRoute();
 
