@@ -1,10 +1,29 @@
 <script setup>
 import { ref, watch } from "vue";
-import { RouterLink } from "vue-router";
+import { RouterLink, useRouter } from "vue-router";
+import { useAuthStore } from "@/stores/auth";
 import Logo from "@/components/atoms/LogoIcon.vue";
 
+const store = useAuthStore();
+const router = useRouter()
 const showPassword = ref(false);
 const type = ref("password");
+const loading = ref(false);
+const user = ref({
+  email: "",
+  password: "",
+  email_confirm: true
+});
+
+const login = async () => {
+  loading.value = true;
+  let isSuccefullyLogin = await store.login(user.value);
+  if(isSuccefullyLogin){
+    router.push('/')
+  }
+
+  loading.value = false;
+};
 
 watch(showPassword, (newValue) => {
   newValue ? (type.value = "text") : (type.value = "password");
@@ -28,12 +47,12 @@ watch(showPassword, (newValue) => {
 
       <div class="auth__card__form">
         <div class="auth__card__form__email">
-          <input type="text" placeholder="E-mail" />
+          <input type="text" placeholder="E-mail" v-model="user.email" />
           <img src="/icons/internet.svg" alt="Internet" />
         </div>
 
         <div class="auth__card__form__password">
-          <input :type="type" placeholder="Senha" />
+          <input :type="type" placeholder="Senha" v-model="user.password" />
           <img
             src="/icons/eye.svg"
             alt="Olhos"
@@ -48,7 +67,10 @@ watch(showPassword, (newValue) => {
           />
         </div>
         <div class="auth__card__form--action">
-          <button>Entrar</button>
+          <button @click="login">
+            <span v-if="loading"> Entrando... </span>
+            <span v-else> Entrar </span>
+          </button>
         </div>
       </div>
 

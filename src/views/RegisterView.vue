@@ -1,9 +1,28 @@
 <script setup>
 import { ref, watch } from "vue";
+import { useAuthStore } from "@/stores/auth";
+import { useRouter } from "vue-router";
 import Logo from "@/components/atoms/LogoIcon.vue";
 
+const router = useRouter();
+const store = useAuthStore();
 const showPassword = ref(false);
 const type = ref("password");
+const loading = ref(false);
+const user = ref({
+  email: "",
+  password: "",
+});
+
+const register = async () => {
+  loading.value = true;
+  let isSuccefullyRegister = await store.register(user.value);
+
+  if (isSuccefullyRegister) {
+    router.push({ name: "auth" });
+  }
+  loading.value = false;
+};
 
 watch(showPassword, (newValue) => {
   newValue ? (type.value = "text") : (type.value = "password");
@@ -27,12 +46,12 @@ watch(showPassword, (newValue) => {
 
       <div class="register__card__form">
         <div class="register__card__form__email">
-          <input type="text" placeholder="E-mail" />
+          <input type="text" placeholder="E-mail" v-model="user.email" />
           <img src="/icons/internet.svg" alt="Internet" />
         </div>
 
         <div class="register__card__form__password">
-          <input :type="type" placeholder="Senha" />
+          <input :type="type" placeholder="Senha" v-model="user.password" />
           <img
             src="/icons/eye.svg"
             alt="Olhos"
@@ -47,7 +66,10 @@ watch(showPassword, (newValue) => {
           />
         </div>
         <div class="register__card__form--action">
-          <button>Cadastrar</button>
+          <button @click="register">
+            <span v-if="loading">Registrando...</span>
+            <span v-else>Cadastrar</span>
+          </button>
         </div>
       </div>
     </div>
