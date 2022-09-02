@@ -10,11 +10,9 @@ const posts = ref([]);
 
 async function fetchPosts() {
   try {
-
     let response = await api.get("/rest/v1/posts?select=*");
     majorPost.value = response.data[0];
     posts.value = response.data.slice(1);
-
   } catch (error) {
     console.error(error);
   }
@@ -29,7 +27,11 @@ fetchPosts();
     </div>
 
     <div class="home__main-post">
-      <CardPostVue :isMainPost="true" :post="majorPost" />
+      <CardPostVue
+        :isMainPost="true"
+        :majorPost="majorPost"
+        v-if="majorPost.id"
+      />
     </div>
 
     <div class="home__posts">

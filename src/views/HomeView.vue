@@ -1,9 +1,9 @@
 <script setup>
-  import HomeTemplateVue from '../components/templates/HomeTemplate.vue';
+import HomeTemplateVue from "../components/templates/HomeTemplate.vue";
 </script>
 
 <template>
   <main>
-    <HomeTemplateVue/>
+    <HomeTemplateVue />
   </main>
 </template>

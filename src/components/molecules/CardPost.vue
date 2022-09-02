@@ -1,14 +1,37 @@
 <script setup>
+import { ref } from "vue";
+import { useRouter } from "vue-router";
+
 const props = defineProps({
   isMainPost: { type: Boolean, default: false },
+  majorPost: { type: Object },
   post: { type: Object },
 });
+
+const router = useRouter();
+
+const postContent = ref({});
+
+const defineContent = () => {
+  props.isMainPost
+    ? (postContent.value = props.majorPost)
+    : (postContent.value = props.post);
+};
+
+const goToPage = (slug) => {
+  router.push({ name: "post", params: { slug: slug } });
+};
+defineContent();
 </script>
 
 <template>
-  <div class="card">
+  <div class="card" @click="goToPage(postContent.slug)">
     <figure class="item">
-      <img src="/imgs/ballon.jpg" alt="Imagem de capa" />
+      <img
+        :src="postContent.cover"
+        onerror="this.scr='/imgs/ballon.jpg';"
+        alt="Imagem de capa"
+      />
     </figure>
 
     <div class="card__content item">
@@ -18,14 +41,13 @@ const props = defineProps({
 
       <div class="card__content__title">
         <span :class="{ isMajorPost: props.isMainPost }">
-          Lorem Ipsum Dolor Met? Seler At dom!
+          {{ postContent.title }}
         </span>
       </div>
 
       <div class="card__content__pre-description">
         <span>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatibus error
-          laboriosam corporis aspernatur.
+          {{ postContent.pre_text }}
         </span>
       </div>
     </div>
@@ -38,13 +60,14 @@ const props = defineProps({
 .card {
   display: flex;
   align-items: flex-start;
-  gap: $sb-size-2;
+  gap: $sb-size-1;
   flex-wrap: wrap;
   cursor: pointer;
 
   figure {
     overflow: hidden;
     border-radius: 15px;
+    height: 60vh;
     img {
       width: 100%;
       border-radius: 15px;
@@ -52,6 +75,12 @@ const props = defineProps({
       object-fit: cover;
       image-rendering: pixelated;
       transition: 0.3s ease-in-out;
+    }
+    @media (min-width: $sb-x-lg) {
+      height: auto;
+    }
+    @media (max-width: $sb-mobile) {
+      height: auto;
     }
   }
 
@@ -65,7 +94,7 @@ const props = defineProps({
     }
 
     &__title {
-      margin: $sb-size-2 0;
+      margin: $sb-size-1 0;
 
       span {
         font-size: 2em;
@@ -85,9 +114,8 @@ const props = defineProps({
       }
 
       @media (max-width: $sb-mobile) {
-        margin: $sb-size-1 0;
         span {
-          font-size: 2em;
+          font-size: 1.5em;
         }
       }
     }
@@ -103,6 +131,7 @@ const props = defineProps({
   }
   .item {
     flex: 1 1 350px;
+    // border: 2px solid red;
   }
 
   &:hover {

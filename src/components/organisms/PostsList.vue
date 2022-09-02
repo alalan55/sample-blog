@@ -6,7 +6,12 @@ const props = defineProps({ posts: { type: Array, required: true } });
 
 <template>
   <div class="posts-list">
-    <CardPostVue class="posts-list__card" v-for="post in props.posts" :key="post.id" />
+    <CardPostVue
+      class="posts-list__card"
+      v-for="post in props.posts"
+      :key="post.id"
+      :post="post"
+    />
   </div>
 </template>
 

@@ -1,30 +1,26 @@
+<script setup>
+const props = defineProps({ post: { type: Object } });
+</script>
+
 <template>
   <div class="card">
     <div class="card__left">
       <div class="card__left__visu">
         <img src="/icons/eye.svg" alt="Visualizações" />
-        <span>Visualizações</span>
+        <span>{{ props.post.visualization || "0" }} Visualizações</span>
       </div>
       <div class="card__left__comments">
-        <span>0 Comentários</span>
+        <span>{{ props.post.comments || "0" }} Comentários</span>
       </div>
     </div>
     <div class="card__right">
       <div class="card__right__like">
         <img src="/icons/hearth.svg" alt="Visualizações" />
-        <span>2</span>
+        <span>{{ props.post.likes || "0" }}</span>
       </div>
     </div>
   </div>
 </template>
-
-<script>
-export default {
-  setup() {
-    return {};
-  },
-};
-</script>
 
 <style lang="scss" scoped>
 @import "@/assets/scss/main.scss";
