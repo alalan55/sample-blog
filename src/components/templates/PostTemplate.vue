@@ -19,7 +19,6 @@ const findPost = async () => {
   try {
     let response = await api.get(`/rest/v1/posts?slug=eq.${slug.value}`);
     post.value = response.data[0];
-    console.log(post.value);
   } catch (error) {
     console.error(error);
   }

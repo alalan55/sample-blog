@@ -6,7 +6,9 @@ export const useAuthStore = defineStore({
   state: () => ({
     user: null,
   }),
-  getters: {},
+  getters: {
+    $user: (state) => state.user,
+  },
   actions: {
     async login(form) {
       try {
@@ -25,6 +27,18 @@ export const useAuthStore = defineStore({
         const { error } = await supabase.auth.signUp(form);
 
         if (!error) {
+          return true;
+        }
+      } catch (error) {
+        return false;
+      }
+    },
+    async logout() {
+      try {
+        let { error } = await supabase.auth.signOut();
+
+        if (!error) {
+          this.user = null;
           return true;
         }
       } catch (error) {

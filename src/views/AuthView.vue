@@ -5,21 +5,21 @@ import { useAuthStore } from "@/stores/auth";
 import Logo from "@/components/atoms/LogoIcon.vue";
 
 const store = useAuthStore();
-const router = useRouter()
+const router = useRouter();
 const showPassword = ref(false);
 const type = ref("password");
 const loading = ref(false);
 const user = ref({
   email: "",
   password: "",
-  email_confirm: true
+  email_confirm: true,
 });
 
 const login = async () => {
   loading.value = true;
   let isSuccefullyLogin = await store.login(user.value);
-  if(isSuccefullyLogin){
-    router.push('/')
+  if (isSuccefullyLogin) {
+    router.push("/");
   }
 
   loading.value = false;
