@@ -1,6 +1,5 @@
 <script setup>
 import { ref, watch } from "vue";
-import { RouterLink } from "vue-router";
 import Logo from "@/components/atoms/LogoIcon.vue";
 
 const showPassword = ref(false);
@@ -12,27 +11,27 @@ watch(showPassword, (newValue) => {
 </script>
 
 <template>
-  <div class="auth">
-    <div class="auth__card">
-      <div class="auth__card__logo">
+  <div class="register">
+    <div class="register__card">
+      <div class="register__card__logo">
         <Logo />
       </div>
 
-      <div class="auth__card__title">
-        <span> Olá, seja bem-vindo! </span>
+      <div class="register__card__title">
+        <span> Faça seu cadastro! </span>
       </div>
 
-      <div class="auth__card__desctiprion">
-        <span> Insira suas informações abaixo, para realizar a autenticação </span>
+      <div class="register__card__desctiprion">
+        <span> Insira suas informações abaixo, para realizar seu cadastro! </span>
       </div>
 
-      <div class="auth__card__form">
-        <div class="auth__card__form__email">
+      <div class="register__card__form">
+        <div class="register__card__form__email">
           <input type="text" placeholder="E-mail" />
           <img src="/icons/internet.svg" alt="Internet" />
         </div>
 
-        <div class="auth__card__form__password">
+        <div class="register__card__form__password">
           <input :type="type" placeholder="Senha" />
           <img
             src="/icons/eye.svg"
@@ -47,13 +46,9 @@ watch(showPassword, (newValue) => {
             @click="showPassword = true"
           />
         </div>
-        <div class="auth__card__form--action">
-          <button>Entrar</button>
+        <div class="register__card__form--action">
+          <button>Cadastrar</button>
         </div>
-      </div>
-
-      <div class="auth__card__link">
-        <RouterLink to="/register">Faça seu registro</RouterLink>
       </div>
     </div>
   </div>
@@ -62,7 +57,7 @@ watch(showPassword, (newValue) => {
 <style lang="scss" scoped>
 @import "@/assets/scss/main.scss";
 
-.auth {
+.register {
   height: 100vh;
   width: 100%;
   display: flex;
@@ -154,16 +149,6 @@ watch(showPassword, (newValue) => {
             background: $sb-bg-pink-2;
           }
         }
-      }
-    }
-    &__link {
-      text-align: center;
-      margin-top: 0.5rem;
-
-      a {
-        text-decoration: none;
-        font-weight: 600;
-        color: $sb-bg-pink-1;
       }
     }
   }

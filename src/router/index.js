@@ -26,6 +26,11 @@ const router = createRouter({
       name: "auth",
     },
     {
+      path: "/register",
+      component: () => import("../views/RegisterView.vue"),
+      name: "register",
+    },
+    {
       path: "/about",
       name: "about",
       // route level code-splitting
