@@ -1,5 +1,6 @@
 <script setup>
 import { ref, watch } from "vue";
+import Logo from "@/components/atoms/LogoIcon.vue";
 
 const showPassword = ref(false);
 const type = ref("password");
@@ -12,7 +13,9 @@ watch(showPassword, (newValue) => {
 <template>
   <div class="auth">
     <div class="auth__card">
-      <div class="auth__card__logo"></div>
+      <div class="auth__card__logo">
+        <Logo />
+      </div>
 
       <div class="auth__card__title">
         <span> Olá, seja bem-vindo! </span>
@@ -60,7 +63,7 @@ watch(showPassword, (newValue) => {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: $sb-bg-pink-3;
+  background: $sb-bg;
   padding: $sb-size-2;
 
   &__card {
@@ -70,6 +73,10 @@ watch(showPassword, (newValue) => {
     -webkit-box-shadow: -2px 8px 12px -1px rgba(0, 0, 0, 0.14);
     box-shadow: -2px 8px 12px -1px rgba(0, 0, 0, 0.14);
 
+    &__logo {
+      text-align: center;
+      margin-bottom: $sb-size-2;
+    }
     &__title {
       margin: 0 0 1rem 0;
       text-align: center;
