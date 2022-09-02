@@ -2,8 +2,10 @@
 import { ref, watch } from "vue";
 import { useAuthStore } from "@/stores/auth";
 import { useRouter } from "vue-router";
+import { useToast } from "vue-toastification";
 import Logo from "@/components/atoms/LogoIcon.vue";
 
+const toast = useToast();
 const router = useRouter();
 const store = useAuthStore();
 const showPassword = ref(false);
@@ -19,6 +21,7 @@ const register = async () => {
   let isSuccefullyRegister = await store.register(user.value);
 
   if (isSuccefullyRegister) {
+    toast.success("Registro realizado com sucesso");
     router.push({ name: "auth" });
   }
   loading.value = false;
