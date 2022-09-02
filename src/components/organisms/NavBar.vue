@@ -10,7 +10,7 @@
             <router-link to="/">Home</router-link>
           </li>
           <li>
-            <router-link to="/about">Posts</router-link>
+            <router-link to="/auth">Login</router-link>
           </li>
         </ul>
       </div>
