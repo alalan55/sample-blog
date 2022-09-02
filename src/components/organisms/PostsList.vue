@@ -1,15 +1,17 @@
 <script setup>
 import CardPostVue from "../molecules/CardPost.vue";
+
+const props = defineProps({ posts: { type: Array, required: true } });
 </script>
 
 <template>
   <div class="posts-list">
-    <CardPostVue class="posts-list__card" />
-    <CardPostVue class="posts-list__card" />
-    <CardPostVue class="posts-list__card" />
-    <CardPostVue class="posts-list__card" />
-    <CardPostVue class="posts-list__card" />
-    <CardPostVue class="posts-list__card" />
+    <CardPostVue
+      class="posts-list__card"
+      v-for="post in props.posts"
+      :key="post.id"
+      :post="post"
+    />
   </div>
 </template>
 

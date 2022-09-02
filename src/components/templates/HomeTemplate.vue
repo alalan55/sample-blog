@@ -1,6 +1,23 @@
 <script setup>
-import CardPostVue from "../molecules/CardPost.vue";
-import PostList from "../organisms/PostsList.vue";
+import { ref, defineAsyncComponent } from "vue";
+import api from "@/services/http";
+
+const CardPostVue = defineAsyncComponent(() => import("../molecules/CardPost.vue"));
+const PostList = defineAsyncComponent(() => import("../organisms/PostsList.vue"));
+
+const majorPost = ref({});
+const posts = ref([]);
+
+async function fetchPosts() {
+  try {
+    let response = await api.get("/rest/v1/posts?select=*");
+    majorPost.value = response.data[0];
+    posts.value = response.data.slice(1);
+  } catch (error) {
+    console.error(error);
+  }
+}
+fetchPosts();
 </script>
 
 <template>
@@ -9,13 +26,23 @@ import PostList from "../organisms/PostsList.vue";
       <span> Sample Blog </span>
     </div>
 
-    <div class="home__main-post">
-      <CardPostVue :isMainPost="true" />
-    </div>
+    <Suspense>
+      <div class="home__main-post">
+        <CardPostVue :isMainPost="true" :majorPost="majorPost" v-if="majorPost.id" />
+      </div>
+      <template #fallback>
+        <span> Loading </span>
+      </template>
+    </Suspense>
 
-    <div class="home__posts">
-      <PostList />
-    </div>
+    <Suspense>
+      <div class="home__posts">
+        <PostList :posts="posts" />
+      </div>
+      <template #fallback>
+        <span> Loading </span>
+      </template>
+    </Suspense>
   </div>
 </template>
 
