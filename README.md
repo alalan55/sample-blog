@@ -1,6 +1,21 @@
-# sample-blog
+# Sample Blog
 
-This template should help get you started developing with Vue 3 in Vite.
+Projeto desenvolvido como um desafio para empresa samplemed. O desafio propunha de criar um MVP de um blog, tendo como requisitos a listagem de posts e autenticação de usuários. Para tais tarefas foi-se utilizado o Supabase, para registro de clientes e listagem de posts.
+
+Projeto desenvolvido usando:
+
+<img src="https://img.shields.io/badge/Vue.js-35495E?style=for-the-badge&logo=vue-dot-js&logoColor=4FC08D" width="50">
+
+:atom: Atomic design
+
+📍 Vue-router
+
+🍍 Pinia
+
+💚 Supabase
+
+💛 Vite
+
 
 ## Recommended IDE Setup
 
